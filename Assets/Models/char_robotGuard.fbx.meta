@@ -1,0 +1,850 @@
+fileFormatVersion: 2
+guid: 3974b181f8f59754ca61fd0985a39b73
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: char_robotGuard_body
+    100004: char_robotGuard_gun
+    100006: char_robotGuard_Head
+    100008: char_robotGuard_helmet
+    100010: char_robotGuard_Hips
+    100012: char_robotGuard_LeftArm
+    100014: char_robotGuard_LeftFoot
+    100016: char_robotGuard_LeftForeArm
+    100018: char_robotGuard_LeftHand
+    100020: char_robotGuard_LeftHandIndex1
+    100022: char_robotGuard_LeftHandIndex2
+    100024: char_robotGuard_LeftHandIndex3
+    100026: char_robotGuard_LeftHandMiddle1
+    100028: char_robotGuard_LeftHandMiddle2
+    100030: char_robotGuard_LeftHandMiddle3
+    100032: char_robotGuard_LeftHandPinky1
+    100034: char_robotGuard_LeftHandPinky2
+    100036: char_robotGuard_LeftHandPinky3
+    100038: char_robotGuard_LeftHandRing1
+    100040: char_robotGuard_LeftHandRing2
+    100042: char_robotGuard_LeftHandRing3
+    100044: char_robotGuard_LeftHandThumb1
+    100046: char_robotGuard_LeftHandThumb2
+    100048: char_robotGuard_LeftLeg
+    100050: char_robotGuard_LeftShoulder
+    100052: char_robotGuard_LeftToeBase
+    100054: char_robotGuard_LeftUpLeg
+    100056: char_robotGuard_Neck
+    100058: char_robotGuard_RightArm
+    100060: char_robotGuard_RightFoot
+    100062: char_robotGuard_RightForeArm
+    100064: char_robotGuard_RightHand
+    100066: char_robotGuard_RightHandIndex1
+    100068: char_robotGuard_RightHandIndex2
+    100070: char_robotGuard_RightHandIndex3
+    100072: char_robotGuard_RightHandMiddle1
+    100074: char_robotGuard_RightHandMiddle2
+    100076: char_robotGuard_RightHandMiddle3
+    100078: char_robotGuard_RightHandPinky1
+    100080: char_robotGuard_RightHandPinky2
+    100082: char_robotGuard_RightHandPinky3
+    100084: char_robotGuard_RightHandRing1
+    100086: char_robotGuard_RightHandRing2
+    100088: char_robotGuard_RightHandRing3
+    100090: char_robotGuard_RightHandThumb1
+    100092: char_robotGuard_RightHandThumb2
+    100094: char_robotGuard_RightLeg
+    100096: char_robotGuard_RightShoulder
+    100098: char_robotGuard_RightToeBase
+    100100: char_robotGuard_RightUpLeg
+    100102: char_robotGuard_skeleton
+    100104: char_robotGuard_Spine
+    400000: //RootNode
+    400002: char_robotGuard_body
+    400004: char_robotGuard_gun
+    400006: char_robotGuard_Head
+    400008: char_robotGuard_helmet
+    400010: char_robotGuard_Hips
+    400012: char_robotGuard_LeftArm
+    400014: char_robotGuard_LeftFoot
+    400016: char_robotGuard_LeftForeArm
+    400018: char_robotGuard_LeftHand
+    400020: char_robotGuard_LeftHandIndex1
+    400022: char_robotGuard_LeftHandIndex2
+    400024: char_robotGuard_LeftHandIndex3
+    400026: char_robotGuard_LeftHandMiddle1
+    400028: char_robotGuard_LeftHandMiddle2
+    400030: char_robotGuard_LeftHandMiddle3
+    400032: char_robotGuard_LeftHandPinky1
+    400034: char_robotGuard_LeftHandPinky2
+    400036: char_robotGuard_LeftHandPinky3
+    400038: char_robotGuard_LeftHandRing1
+    400040: char_robotGuard_LeftHandRing2
+    400042: char_robotGuard_LeftHandRing3
+    400044: char_robotGuard_LeftHandThumb1
+    400046: char_robotGuard_LeftHandThumb2
+    400048: char_robotGuard_LeftLeg
+    400050: char_robotGuard_LeftShoulder
+    400052: char_robotGuard_LeftToeBase
+    400054: char_robotGuard_LeftUpLeg
+    400056: char_robotGuard_Neck
+    400058: char_robotGuard_RightArm
+    400060: char_robotGuard_RightFoot
+    400062: char_robotGuard_RightForeArm
+    400064: char_robotGuard_RightHand
+    400066: char_robotGuard_RightHandIndex1
+    400068: char_robotGuard_RightHandIndex2
+    400070: char_robotGuard_RightHandIndex3
+    400072: char_robotGuard_RightHandMiddle1
+    400074: char_robotGuard_RightHandMiddle2
+    400076: char_robotGuard_RightHandMiddle3
+    400078: char_robotGuard_RightHandPinky1
+    400080: char_robotGuard_RightHandPinky2
+    400082: char_robotGuard_RightHandPinky3
+    400084: char_robotGuard_RightHandRing1
+    400086: char_robotGuard_RightHandRing2
+    400088: char_robotGuard_RightHandRing3
+    400090: char_robotGuard_RightHandThumb1
+    400092: char_robotGuard_RightHandThumb2
+    400094: char_robotGuard_RightLeg
+    400096: char_robotGuard_RightShoulder
+    400098: char_robotGuard_RightToeBase
+    400100: char_robotGuard_RightUpLeg
+    400102: char_robotGuard_skeleton
+    400104: char_robotGuard_Spine
+    2300000: char_robotGuard_gun
+    2300002: char_robotGuard_helmet
+    3300000: char_robotGuard_gun
+    3300002: char_robotGuard_helmet
+    4300000: char_robotGuard_body
+    4300002: char_robotGuard_helmet
+    4300004: char_robotGuard_gun
+    7400000: Gripped
+    9500000: //RootNode
+    13700000: char_robotGuard_body
+  materials:
+    importMaterials: 1
+    materialName: 1
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Gripped
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 2
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human:
+    - boneName: char_robotGuard_Hips
+      humanName: Hips
+      limit:
+        min: {x: -40, y: -40, z: -40}
+        max: {x: 40, y: 40, z: 40}
+        value: {x: .0874271616, y: 0, z: .0437135808}
+        length: .109283991
+        modified: 1
+    - boneName: char_robotGuard_LeftUpLeg
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: -60.0000038, y: -60.0000038, z: -90}
+        max: {x: 60.0000038, y: 60.0000038, z: 50}
+        value: {x: .303077132, y: 0, z: .151538566}
+        length: .378846556
+        modified: 1
+    - boneName: char_robotGuard_RightUpLeg
+      humanName: RightUpperLeg
+      limit:
+        min: {x: -60.0000038, y: -60.0000038, z: -90}
+        max: {x: 60.0000038, y: 60.0000038, z: 50}
+        value: {x: .303077281, y: 0, z: .15153864}
+        length: .378846735
+        modified: 1
+    - boneName: char_robotGuard_LeftLeg
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: -90, y: 0, z: -80}
+        max: {x: 90, y: 0, z: 80}
+        value: {x: .347239763, y: 0, z: .173619881}
+        length: .434049845
+        modified: 1
+    - boneName: char_robotGuard_RightLeg
+      humanName: RightLowerLeg
+      limit:
+        min: {x: -90, y: 0, z: -80}
+        max: {x: 90, y: 0, z: 80}
+        value: {x: .347239494, y: 0, z: .173619747}
+        length: .434049517
+        modified: 1
+    - boneName: char_robotGuard_LeftFoot
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: -30.0000019, z: -50}
+        max: {x: 0, y: 30.0000019, z: 50}
+        value: {x: .090716742, y: 0, z: .045358371}
+        length: .113395959
+        modified: 1
+    - boneName: char_robotGuard_RightFoot
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: -30.0000019, z: -50}
+        max: {x: 0, y: 30.0000019, z: 50}
+        value: {x: .0907169059, y: 0, z: .0453584529}
+        length: .113396168
+        modified: 1
+    - boneName: char_robotGuard_Spine
+      humanName: Spine
+      limit:
+        min: {x: -40, y: -40, z: -40}
+        max: {x: 40, y: 40, z: 40}
+        value: {x: .316319525, y: 0, z: .158159763}
+        length: .395399541
+        modified: 1
+    - boneName: char_robotGuard_Neck
+      humanName: Neck
+      limit:
+        min: {x: -40, y: -40, z: -40}
+        max: {x: 40, y: 40, z: 40}
+        value: {x: .0636743754, y: 0, z: .0318371877}
+        length: .0795930028
+        modified: 1
+    - boneName: char_robotGuard_Head
+      humanName: Head
+      limit:
+        min: {x: -40, y: -40, z: -40}
+        max: {x: 40, y: 40, z: 40}
+        value: {x: .0636743754, y: 0, z: .0318371877}
+        length: .0795930028
+        modified: 1
+    - boneName: char_robotGuard_LeftShoulder
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: -15.000001, z: -15.000001}
+        max: {x: 0, y: 15.000001, z: 30.0000019}
+        value: {x: .0508682095, y: 0, z: .0254341047}
+        length: .0635852814
+        modified: 1
+    - boneName: char_robotGuard_RightShoulder
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: -15.000001, z: -15.000001}
+        max: {x: 0, y: 15.000001, z: 30.0000019}
+        value: {x: .0508682765, y: 0, z: .0254341383}
+        length: .0635853633
+        modified: 1
+    - boneName: char_robotGuard_LeftArm
+      humanName: LeftUpperArm
+      limit:
+        min: {x: -90, y: -100, z: -60.0000038}
+        max: {x: 90, y: 100, z: 100}
+        value: {x: .19278203, y: 0, z: .0963910148}
+        length: .2409776
+        modified: 1
+    - boneName: char_robotGuard_RightArm
+      humanName: RightUpperArm
+      limit:
+        min: {x: -90, y: -100, z: -60.0000038}
+        max: {x: 90, y: 100, z: 100}
+        value: {x: .192784712, y: 0, z: .0963923559}
+        length: .240980953
+        modified: 1
+    - boneName: char_robotGuard_LeftForeArm
+      humanName: LeftLowerArm
+      limit:
+        min: {x: -90, y: 0, z: -80}
+        max: {x: 90, y: 0, z: 80}
+        value: {x: .246205896, y: 0, z: .123102948}
+        length: .307757437
+        modified: 1
+    - boneName: char_robotGuard_RightForeArm
+      humanName: RightLowerArm
+      limit:
+        min: {x: -90, y: 0, z: -80}
+        max: {x: 90, y: 0, z: 80}
+        value: {x: .246207401, y: 0, z: .123103701}
+        length: .307759315
+        modified: 1
+    - boneName: char_robotGuard_LeftHand
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: -40, z: -80}
+        max: {x: 0, y: 40, z: 80}
+        value: {x: .123102948, y: 0, z: .061551474}
+        length: .153878719
+        modified: 1
+    - boneName: char_robotGuard_RightHand
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: -40, z: -80}
+        max: {x: 0, y: 40, z: 80}
+        value: {x: .123103701, y: 0, z: .0615518503}
+        length: .153879657
+        modified: 1
+    - boneName: char_robotGuard_LeftToeBase
+      humanName: LeftToes
+      limit:
+        min: {x: 0, y: 0, z: -50}
+        max: {x: 0, y: 0, z: 50}
+        value: {x: .0551487766, y: 0, z: .0275743883}
+        length: .0689359903
+        modified: 1
+    - boneName: char_robotGuard_RightToeBase
+      humanName: RightToes
+      limit:
+        min: {x: 0, y: 0, z: -50}
+        max: {x: 0, y: 0, z: 50}
+        value: {x: .0551488064, y: 0, z: .0275744032}
+        length: .0689360276
+        modified: 1
+    - boneName: char_robotGuard_LeftHandThumb1
+      humanName: Left Thumb Proximal
+      limit:
+        min: {x: 0, y: -25, z: -20}
+        max: {x: 0, y: 25, z: 20}
+        value: {x: .0231402591, y: 0, z: .0115701295}
+        length: .0289253332
+        modified: 1
+    - boneName: char_robotGuard_LeftHandThumb2
+      humanName: Left Thumb Intermediate
+      limit:
+        min: {x: 0, y: 0, z: -40}
+        max: {x: 0, y: 0, z: 35}
+        value: {x: .0173551943, y: 0, z: .00867759716}
+        length: .0216940008
+        modified: 1
+    - boneName: char_robotGuard_LeftHandIndex1
+      humanName: Left Index Proximal
+      limit:
+        min: {x: 0, y: -20, z: -50}
+        max: {x: 0, y: 20, z: 50}
+        value: {x: .0324267857, y: 0, z: .0162133928}
+        length: .0405335017
+        modified: 1
+    - boneName: char_robotGuard_LeftHandIndex2
+      humanName: Left Index Intermediate
+      limit:
+        min: {x: 0, y: 0, z: -45}
+        max: {x: 0, y: 0, z: 45}
+        value: {x: .0183558594, y: 0, z: .00917792972}
+        length: .0229448322
+        modified: 1
+    - boneName: char_robotGuard_LeftHandIndex3
+      humanName: Left Index Distal
+      limit:
+        min: {x: 0, y: 0, z: -45}
+        max: {x: 0, y: 0, z: 45}
+        value: {x: .013766896, y: 0, z: .00688344799}
+        length: .0172086246
+        modified: 1
+    - boneName: char_robotGuard_LeftHandMiddle1
+      humanName: Left Middle Proximal
+      limit:
+        min: {x: 0, y: -7.50000048, z: -50}
+        max: {x: 0, y: 7.50000048, z: 50}
+        value: {x: .0352425799, y: 0, z: .0176212899}
+        length: .0440532416
+        modified: 1
+    - boneName: char_robotGuard_LeftHandMiddle2
+      humanName: Left Middle Intermediate
+      limit:
+        min: {x: 0, y: 0, z: -45}
+        max: {x: 0, y: 0, z: 45}
+        value: {x: .019946022, y: 0, z: .00997301098}
+        length: .0249325372
+        modified: 1
+    - boneName: char_robotGuard_LeftHandMiddle3
+      humanName: Left Middle Distal
+      limit:
+        min: {x: 0, y: 0, z: -45}
+        max: {x: 0, y: 0, z: 45}
+        value: {x: .0149595197, y: 0, z: .00747975986}
+        length: .0186994039
+        modified: 1
+    - boneName: char_robotGuard_LeftHandRing1
+      humanName: Left Ring Proximal
+      limit:
+        min: {x: 0, y: -7.50000048, z: -50}
+        max: {x: 0, y: 7.50000048, z: 50}
+        value: {x: .0306658018, y: 0, z: .0153329009}
+        length: .0383322611
+        modified: 1
+    - boneName: char_robotGuard_LeftHandRing2
+      humanName: Left Ring Intermediate
+      limit:
+        min: {x: 0, y: 0, z: -45}
+        max: {x: 0, y: 0, z: 45}
+        value: {x: .0173608866, y: 0, z: .00868044328}
+        length: .021701118
+        modified: 1
+    - boneName: char_robotGuard_LeftHandRing3
+      humanName: Left Ring Distal
+      limit:
+        min: {x: 0, y: 0, z: -45}
+        max: {x: 0, y: 0, z: 45}
+        value: {x: .0130206672, y: 0, z: .00651033362}
+        length: .016275838
+        modified: 1
+    - boneName: char_robotGuard_LeftHandPinky1
+      humanName: Left Little Proximal
+      limit:
+        min: {x: 0, y: -20, z: -50}
+        max: {x: 0, y: 20, z: 50}
+        value: {x: .0244131591, y: 0, z: .0122065796}
+        length: .0305164587
+        modified: 1
+    - boneName: char_robotGuard_LeftHandPinky2
+      humanName: Left Little Intermediate
+      limit:
+        min: {x: 0, y: 0, z: -45}
+        max: {x: 0, y: 0, z: 45}
+        value: {x: .0138262911, y: 0, z: .00691314554}
+        length: .0172828678
+        modified: 1
+    - boneName: char_robotGuard_LeftHandPinky3
+      humanName: Left Little Distal
+      limit:
+        min: {x: 0, y: 0, z: -45}
+        max: {x: 0, y: 0, z: 45}
+        value: {x: .0103697171, y: 0, z: .00518485857}
+        length: .0129621513
+        modified: 1
+    - boneName: char_robotGuard_RightHandThumb1
+      humanName: Right Thumb Proximal
+      limit:
+        min: {x: 0, y: -25, z: -20}
+        max: {x: 0, y: 25, z: 20}
+        value: {x: .0231409427, y: 0, z: .0115704713}
+        length: .0289261863
+        modified: 1
+    - boneName: char_robotGuard_RightHandThumb2
+      humanName: Right Thumb Intermediate
+      limit:
+        min: {x: 0, y: 0, z: -40}
+        max: {x: 0, y: 0, z: 35}
+        value: {x: .0173557047, y: 0, z: .00867785234}
+        length: .0216946397
+        modified: 1
+    - boneName: char_robotGuard_RightHandIndex1
+      humanName: Right Index Proximal
+      limit:
+        min: {x: 0, y: -20, z: -50}
+        max: {x: 0, y: 20, z: 50}
+        value: {x: .0324271657, y: 0, z: .0162135828}
+        length: .0405339748
+        modified: 1
+    - boneName: char_robotGuard_RightHandIndex2
+      humanName: Right Index Intermediate
+      limit:
+        min: {x: 0, y: 0, z: -45}
+        max: {x: 0, y: 0, z: 45}
+        value: {x: .0183553975, y: 0, z: .00917769875}
+        length: .0229442567
+        modified: 1
+    - boneName: char_robotGuard_RightHandIndex3
+      humanName: Right Index Distal
+      limit:
+        min: {x: 0, y: 0, z: -45}
+        max: {x: 0, y: 0, z: 45}
+        value: {x: .0137665505, y: 0, z: .00688327523}
+        length: .0172081925
+        modified: 1
+    - boneName: char_robotGuard_RightHandMiddle1
+      humanName: Right Middle Proximal
+      limit:
+        min: {x: 0, y: -7.50000048, z: -50}
+        max: {x: 0, y: 7.50000048, z: 50}
+        value: {x: .0352427028, y: 0, z: .0176213514}
+        length: .0440533981
+        modified: 1
+    - boneName: char_robotGuard_RightHandMiddle2
+      humanName: Right Middle Intermediate
+      limit:
+        min: {x: 0, y: 0, z: -45}
+        max: {x: 0, y: 0, z: 45}
+        value: {x: .0199455228, y: 0, z: .00997276139}
+        length: .0249319114
+        modified: 1
+    - boneName: char_robotGuard_RightHandMiddle3
+      humanName: Right Middle Distal
+      limit:
+        min: {x: 0, y: 0, z: -45}
+        max: {x: 0, y: 0, z: 45}
+        value: {x: .0149591444, y: 0, z: .0074795722}
+        length: .0186989345
+        modified: 1
+    - boneName: char_robotGuard_RightHandRing1
+      humanName: Right Ring Proximal
+      limit:
+        min: {x: 0, y: -7.50000048, z: -50}
+        max: {x: 0, y: 7.50000048, z: 50}
+        value: {x: .0306666102, y: 0, z: .0153333051}
+        length: .0383332707
+        modified: 1
+    - boneName: char_robotGuard_RightHandRing2
+      humanName: Right Ring Intermediate
+      limit:
+        min: {x: 0, y: 0, z: -45}
+        max: {x: 0, y: 0, z: 45}
+        value: {x: .0173603408, y: 0, z: .0086801704}
+        length: .0217004344
+        modified: 1
+    - boneName: char_robotGuard_RightHandRing3
+      humanName: Right Ring Distal
+      limit:
+        min: {x: 0, y: 0, z: -45}
+        max: {x: 0, y: 0, z: 45}
+        value: {x: .0130202575, y: 0, z: .00651012873}
+        length: .0162753258
+        modified: 1
+    - boneName: char_robotGuard_RightHandPinky1
+      humanName: Right Little Proximal
+      limit:
+        min: {x: 0, y: -20, z: -50}
+        max: {x: 0, y: 20, z: 50}
+        value: {x: .0244135857, y: 0, z: .0122067928}
+        length: .0305169914
+        modified: 1
+    - boneName: char_robotGuard_RightHandPinky2
+      humanName: Right Little Intermediate
+      limit:
+        min: {x: 0, y: 0, z: -45}
+        max: {x: 0, y: 0, z: 45}
+        value: {x: .0138255982, y: 0, z: .00691279909}
+        length: .0172820017
+        modified: 1
+    - boneName: char_robotGuard_RightHandPinky3
+      humanName: Right Little Distal
+      limit:
+        min: {x: 0, y: 0, z: -45}
+        max: {x: 0, y: 0, z: 45}
+        value: {x: .0103691975, y: 0, z: .00518459873}
+        length: .0129615013
+        modified: 1
+    skeleton:
+    - name: char_robotGuard
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: .99999994}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: char_robotGuard_skeleton
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: 0, w: .99999994}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: char_robotGuard_Hips
+      position: {x: -6.9505234e-17, y: 1.03372717, z: .0356030911}
+      rotation: {x: .492446303, y: .507441223, z: .492446303, w: .507441282}
+      scale: {x: .99999994, y: .99999994, z: 1}
+      transformModified: 1
+    - name: char_robotGuard_LeftUpLeg
+      position: {x: -.122133575, y: .011331778, z: -.0689055398}
+      rotation: {x: -.995700419, y: -.0926312208, z: -1.95519312e-09, w: 6.22734504e-08}
+      scale: {x: 1, y: 1.00000012, z: 1.00000012}
+      transformModified: 1
+    - name: char_robotGuard_LeftLeg
+      position: {x: -.37173444, y: -.00199667527, z: .0730361491}
+      rotation: {x: -2.79945649e-08, y: -3.15065201e-08, z: .0188125819, w: .999822974}
+      scale: {x: 1, y: .99999994, z: .99999994}
+      transformModified: 1
+    - name: char_robotGuard_LeftFoot
+      position: {x: -.434049875, y: 5.12513658e-08, z: 1.94382039e-08}
+      rotation: {x: .86925447, y: .494364858, z: 0, w: 0}
+      scale: {x: 1, y: .99999994, z: .999999881}
+      transformModified: 1
+    - name: char_robotGuard_LeftToeBase
+      position: {x: -.13787201, y: -5.53547821e-08, z: 2.40752707e-09}
+      rotation: {x: -.227291971, y: -.669580698, z: -.227291971, w: .669580698}
+      scale: {x: 1.00000012, y: 1, z: 1}
+      transformModified: 1
+    - name: char_robotGuard_RightUpLeg
+      position: {x: -.122133501, y: .011331683, z: .0689056069}
+      rotation: {x: -5.67489771e-08, y: 1.78174264e-09, z: -.995700419, w: .0926312208}
+      scale: {x: 1, y: 1.00000012, z: 1}
+      transformModified: 1
+    - name: char_robotGuard_RightLeg
+      position: {x: .371734649, y: -.00199680263, z: .0730363578}
+      rotation: {x: -2.79945649e-08, y: 3.15065201e-08, z: -.0188125819, w: .999822974}
+      scale: {x: 1.00000024, y: .99999994, z: .99999994}
+      transformModified: 1
+    - name: char_robotGuard_RightFoot
+      position: {x: .434049487, y: 1.16713863e-07, z: 2.68887632e-08}
+      rotation: {x: 0, y: 0, z: .494364828, w: -.86925447}
+      scale: {x: 1, y: .999999881, z: 1.00000012}
+      transformModified: 1
+    - name: char_robotGuard_RightToeBase
+      position: {x: .13787207, y: 6.0700394e-08, z: 5.04305575e-09}
+      rotation: {x: 1.22199433e-08, y: -4.1481103e-09, z: -.321439385, w: .94693011}
+      scale: {x: 1.00000012, y: 1, z: 1}
+      transformModified: 1
+    - name: char_robotGuard_Spine
+      position: {x: .10916803, y: -.00503296498, z: -7.23746085e-09}
+      rotation: {x: -.0283698272, y: -.99959743, z: -2.84822015e-08, w: 3.10663921e-08}
+      scale: {x: 1.00000024, y: 1.00000012, z: 1}
+      transformModified: 1
+    - name: char_robotGuard_LeftShoulder
+      position: {x: -.247965381, y: -.0189684331, z: .131307274}
+      rotation: {x: -.410582215, y: .447834373, z: .536756337, w: .585456312}
+      scale: {x: 1, y: .999999881, z: .99999994}
+      transformModified: 1
+    - name: char_robotGuard_LeftArm
+      position: {x: -.0635852963, y: 3.49935931e-07, z: -2.00084614e-07}
+      rotation: {x: .0810572058, y: .122538626, z: .0857570991, w: .985423565}
+      scale: {x: 1.00000012, y: 1, z: 1}
+      transformModified: 1
+    - name: char_robotGuard_LeftForeArm
+      position: {x: -.238371015, y: .0353247039, z: -.00126049458}
+      rotation: {x: -.0022794276, y: -.0410712883, z: -.526822031, w: .848979592}
+      scale: {x: 1.00000012, y: 1, z: 1}
+      transformModified: 1
+    - name: char_robotGuard_LeftHand
+      position: {x: -.176925212, y: -.248301491, z: .0419350751}
+      rotation: {x: -.00276770233, y: .00809887145, z: .46268484, w: .886481464}
+      scale: {x: 1, y: 1.00000012, z: .99999994}
+      transformModified: 1
+    - name: char_robotGuard_LeftHandIndex1
+      position: {x: -.0701329783, y: .0124757122, z: .0255052112}
+      rotation: {x: .0102325715, y: .00696283113, z: -.00867203623, w: .999885738}
+      scale: {x: 1.00000012, y: .999999821, z: 1}
+      transformModified: 1
+    - name: char_robotGuard_LeftHandIndex2
+      position: {x: -.0405335091, y: -3.73845324e-07, z: 4.93223382e-08}
+      rotation: {x: .000711352215, y: .000479871669, z: .0111968219, w: .999936938}
+      scale: {x: 1.00000012, y: 1.00000012, z: 1.00000012}
+      transformModified: 1
+    - name: char_robotGuard_LeftHandIndex3
+      position: {x: -.0229448043, y: 2.1975498e-07, z: -4.9494937e-09}
+      rotation: {x: -.0110165793, y: -.000252173864, z: -.0228819717, w: .99967742}
+      scale: {x: .99999994, y: 1, z: .999999821}
+      transformModified: 1
+    - name: char_robotGuard_LeftHandMiddle1
+      position: {x: -.0718104169, y: .0124759581, z: .00505479565}
+      rotation: {x: .0102415401, y: .0067242221, z: -.00871306565, w: .99988693}
+      scale: {x: 1.00000024, y: .99999994, z: 1}
+      transformModified: 1
+    - name: char_robotGuard_LeftHandMiddle2
+      position: {x: -.0440532304, y: -8.17422631e-07, z: 2.8291014e-08}
+      rotation: {x: .000649852504, y: .000440989534, z: .0103051402, w: .999946535}
+      scale: {x: .999999821, y: 1, z: 1}
+      transformModified: 1
+    - name: char_robotGuard_LeftHandMiddle3
+      position: {x: -.0249325465, y: 3.05216503e-07, z: -6.37414521e-09}
+      rotation: {x: -.0109564103, y: -.000230803082, z: -.0210566502, w: .999718189}
+      scale: {x: 1.00000012, y: .99999994, z: 1}
+      transformModified: 1
+    - name: char_robotGuard_LeftHandPinky1
+      position: {x: -.0721201673, y: .0124763492, z: -.0332361944}
+      rotation: {x: .0101912552, y: .00791194569, z: -.00854763202, w: .999880195}
+      scale: {x: 1.00000012, y: .99999994, z: 1}
+      transformModified: 1
+    - name: char_robotGuard_LeftHandPinky2
+      position: {x: -.0305164382, y: -7.53119537e-07, z: -2.52020946e-08}
+      rotation: {x: .00097385369, y: .000640970306, z: .0148619255, w: .999888837}
+      scale: {x: 1, y: .99999994, z: 1}
+      transformModified: 1
+    - name: char_robotGuard_LeftHandPinky3
+      position: {x: -.0172828902, y: -3.79975404e-07, z: 4.08635152e-08}
+      rotation: {x: -.0112725673, y: -.000342675427, z: -.0303827804, w: .999474645}
+      scale: {x: 1, y: 1.00000012, z: .99999994}
+      transformModified: 1
+    - name: char_robotGuard_LeftHandRing1
+      position: {x: -.0722585171, y: .0124758305, z: -.0148618678}
+      rotation: {x: .0102259992, y: .00713031273, z: -.00863739289, w: .999884963}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: char_robotGuard_LeftHandRing2
+      position: {x: -.0383322388, y: 3.62203906e-07, z: 1.03009579e-09}
+      rotation: {x: .000756198948, y: .000507929304, z: .0118391486, w: .999929428}
+      scale: {x: 1, y: 1, z: 1.00000012}
+      transformModified: 1
+    - name: char_robotGuard_LeftHandRing3
+      position: {x: -.021701131, y: -4.63638514e-07, z: 3.88855739e-08}
+      rotation: {x: -.0110604437, y: -.000267723313, z: -.0241946559, w: .999646008}
+      scale: {x: 1.00000012, y: 1, z: .999999821}
+      transformModified: 1
+    - name: char_robotGuard_LeftHandThumb1
+      position: {x: -.0468879305, y: -.00486503029, z: .0469879396}
+      rotation: {x: .381582499, y: .381178439, z: -.197718233, w: .818538487}
+      scale: {x: 1.00000012, y: 1, z: .999999821}
+      transformModified: 1
+    - name: char_robotGuard_LeftHandThumb2
+      position: {x: -.0287781786, y: -.00164757739, z: -.00240348885}
+      rotation: {x: -.420362145, y: -.371804088, z: .0835275128, w: .823456407}
+      scale: {x: .999999881, y: 1.00000012, z: 1}
+      transformModified: 1
+    - name: char_robotGuard_Neck
+      position: {x: -.39539957, y: 6.13783243e-07, z: 1.34512523e-09}
+      rotation: {x: 0, y: 0, z: -.151223734, w: .988499522}
+      scale: {x: .999999821, y: .999999881, z: 1}
+      transformModified: 1
+    - name: char_robotGuard_Head
+      position: {x: -.0795930102, y: 7.35808641e-08, z: -4.25225744e-10}
+      rotation: {x: 0, y: 0, z: 0, w: .99999994}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: char_robotGuard_helmet
+      position: {x: 1.57870996, y: .337435246, z: 4.70026788e-16}
+      rotation: {x: .551175416, y: -.442951024, z: -.551175416, w: -.442951024}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: char_robotGuard_RightShoulder
+      position: {x: -.247970238, y: -.018967988, z: -.131307036}
+      rotation: {x: .447834373, y: .410582215, z: -.585456312, w: .536756337}
+      scale: {x: .99999994, y: .999999702, z: .999999762}
+      transformModified: 1
+    - name: char_robotGuard_RightArm
+      position: {x: .0635853484, y: -1.32228274e-06, z: -1.77718746e-07}
+      rotation: {x: -.0620074347, y: .0971065164, z: .0206002351, w: .99312681}
+      scale: {x: 1, y: .99999994, z: 1.00000024}
+      transformModified: 1
+    - name: char_robotGuard_RightForeArm
+      position: {x: .240621224, y: .0051445514, z: -.0121178553}
+      rotation: {x: -.783273518, y: -.0116724027, z: -.00327125401, w: -.621558845}
+      scale: {x: .99999994, y: .999999881, z: 1}
+      transformModified: 1
+    - name: char_robotGuard_RightHand
+      position: {x: .305884749, y: -.0331729837, z: .00706679607}
+      rotation: {x: .705120802, y: .00823994912, z: -.0129032889, w: -.70892179}
+      scale: {x: 1.00000012, y: .999999821, z: .999999642}
+      transformModified: 1
+    - name: char_robotGuard_RightHandIndex1
+      position: {x: .0694011524, y: -.0138476677, z: -.0267640203}
+      rotation: {x: .0103114247, y: .0158628821, z: -.0186254997, w: .999647439}
+      scale: {x: .999999881, y: 1, z: 1}
+      transformModified: 1
+    - name: char_robotGuard_RightHandIndex2
+      position: {x: .0405339971, y: -4.0715716e-07, z: -9.7720914e-08}
+      rotation: {x: .000711327069, y: .000479823939, z: .0111968517, w: .999936938}
+      scale: {x: 1.00000048, y: .99999994, z: 1.00000024}
+      transformModified: 1
+    - name: char_robotGuard_RightHandIndex3
+      position: {x: .0229442623, y: 4.40861712e-08, z: -9.11579221e-08}
+      rotation: {x: -.0110166268, y: -.0002521633, z: -.022881994, w: .99967742}
+      scale: {x: .999999821, y: 1.00000012, z: 1}
+      transformModified: 1
+    - name: char_robotGuard_RightHandMiddle1
+      position: {x: .0714465082, y: -.0138890119, z: -.00634719664}
+      rotation: {x: .0103174085, y: .0156282037, z: -.018680919, w: .999650061}
+      scale: {x: .99999994, y: .999999821, z: .999999821}
+      transformModified: 1
+    - name: char_robotGuard_RightHandMiddle2
+      position: {x: .0440534241, y: 1.30029571e-06, z: -7.77587204e-08}
+      rotation: {x: .000649770955, y: .000440982287, z: .010304979, w: .999946535}
+      scale: {x: .99999994, y: 1, z: .999999881}
+      transformModified: 1
+    - name: char_robotGuard_RightHandMiddle3
+      position: {x: .0249319039, y: -3.99494553e-07, z: 7.44836228e-08}
+      rotation: {x: -.0109563693, y: -.000230845908, z: -.0210565105, w: .999718189}
+      scale: {x: 1.00000036, y: 1.00000012, z: 1.00000036}
+      transformModified: 1
+    - name: char_robotGuard_RightHandPinky1
+      position: {x: .0724450424, y: -.0139085548, z: .0319321342}
+      rotation: {x: .0102805365, y: .0168140847, z: -.0185069609, w: .999634445}
+      scale: {x: .99999994, y: 1, z: 1.00000012}
+      transformModified: 1
+    - name: char_robotGuard_RightHandPinky2
+      position: {x: .0305170082, y: 7.69423934e-07, z: -1.29304896e-08}
+      rotation: {x: .000973825227, y: .000640900806, z: .0148619302, w: .999888837}
+      scale: {x: .99999994, y: 1.00000024, z: .99999994}
+      transformModified: 1
+    - name: char_robotGuard_RightHandPinky3
+      position: {x: .0172820091, y: -1.61944627e-07, z: 1.82528961e-08}
+      rotation: {x: -.0112725897, y: -.000342655723, z: -.0303827692, w: .999474645}
+      scale: {x: 1, y: .99999994, z: 1}
+      transformModified: 1
+    - name: char_robotGuard_RightHandRing1
+      position: {x: .0722520873, y: -.013904687, z: .0135582332}
+      rotation: {x: .0103067653, y: .0160327721, z: -.0185978487, w: .999645293}
+      scale: {x: .999999702, y: 1, z: .99999994}
+      transformModified: 1
+    - name: char_robotGuard_RightHandRing2
+      position: {x: .0383332968, y: -4.4805023e-07, z: 6.06362605e-08}
+      rotation: {x: .000756142661, y: .000507825112, z: .0118392054, w: .999929428}
+      scale: {x: 1.00000048, y: 1.00000012, z: 1.00000036}
+      transformModified: 1
+    - name: char_robotGuard_RightHandRing3
+      position: {x: .0217004418, y: 1.3725097e-06, z: -1.74957478e-07}
+      rotation: {x: -.0110603934, y: -.000267676951, z: -.0241947304, w: .999646008}
+      scale: {x: .999999762, y: 1, z: 1}
+      transformModified: 1
+    - name: char_robotGuard_RightHandThumb1
+      position: {x: .0461200029, y: .00395602919, z: -.0478246994}
+      rotation: {x: .383605093, y: .384769917, z: -.209182829, w: .813044727}
+      scale: {x: 1.00000012, y: 1.00000012, z: 1.00000024}
+      transformModified: 1
+    - name: char_robotGuard_RightHandThumb2
+      position: {x: .0287789758, y: .00164778763, z: .00240389374}
+      rotation: {x: .122744903, y: -.0850149244, z: .318449587, w: .936106801}
+      scale: {x: .99999994, y: 1, z: .99999994}
+      transformModified: 1
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 3
+  humanoidOversampling: 1
+  additionalBone: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
