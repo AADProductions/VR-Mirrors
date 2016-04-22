@@ -1,5 +1,5 @@
-SteamVR plugin for Unity - v1.0.6
-Copyright 2014-2015, Valve Corporation, All rights reserved.
+SteamVR plugin for Unity - v1.0.8
+Copyright 2014-2016, Valve Corporation, All rights reserved.
 
 
 Quickstart:
@@ -13,6 +13,62 @@ Requirements:
 The SteamVR runtime must be installed.  This can be found in Steam under Tools.
 
 The plugin currently only supports Windows / DX11.
+
+
+Changes for v1.0.8:
+
+* Updated to SteamVR runtime v1457155403.
+
+* Updated to work with native OpenVR integration introduced in Unity 5.4.  In this and newer versions, openvr_api.dll will be automatically deleted when launching since it ships as part of Unity now.
+
+* C# interop now exports arrays as individual elements to avoid the associated memory allocation overhead passing data back and forth between native and managed code.
+
+* Applications should no longer call GetGenericInterface directly, but instead use the accessors provided by Valve.VR.OpenVR (e.g. OpenVR.System for the IVRSystem interface).
+
+* Added SteamVR_ExternalCamera for filming mixed reality videos.  Automatically enabled when externalcamera.cfg is added to the root of your projects (next to Assets or executable), and toggled by the presence of a third controller.
+
+* Render models updated to load asynchronously.  Sends "render_model_loaded" event when finished.
+
+* Added 'shader' property to render models to allow using alternate shaders. This also creates a dependency within the scene to ensure the shader is loaded in baked builds.
+
+* Fix for render model components not respecting render model scale.
+
+* SteamVR_Render.lockPhysicsUpdateRateToRenderFrequency now respects Time.timeScale.
+
+* SteamVR_LoadLevel now hides overlays when finished to avoid persisting performance degredation.
+
+* Added ability to launch external applications via SteamVR_LoadLevel.
+
+* Added option to load levels non-asynchronously in SteamVR_LoadLevel since Unity crashes on some content when using asyn loading.
+
+* SteamVR auto-disabled if initialization fails, to avoid continual retries.
+
+* Updated SteamVR_ControllerManager to get controller indices from the runtime (via IVRSystem.GetTrackedDeviceIndexForControllerRole).
+
+* SteamVR_ControllerManager now allows you to assign additional controllers to game objects.
+
+* [CameraRig] prefab now listens for a third controller connection which will enable mixed reality recording mode in the game view.
+
+* AudioListener is now transferred to a child of the eye camera called "ears" to allow controlling rotation independently when using speakers instead of headphones.
+
+* Flare Layer is no longer transferred from eye camera to game view camera.
+
+
+Changes for v1.0.7:
+
+* Updated to SteamVR runtime v1448479831.
+
+* Many enums updated to reflect latest SDK cleanup (v0.9.12).
+
+* Various fixes to support color space changes in the SDK.
+
+* Render models set the layer on their child components now to match their own.
+
+* Added a bool 'Load Additive' to SteamVR_LoadLevel script to optionally load the level additively, as well as an optional 'Post Load Settle Time'.
+
+* Fixed some issues with SteamVR_LoadLevel fading to a color with 'Show Grid' set to false.
+
+* Fixed an issue with orienting the loading screen in the SteamVR_LoadLevel script when using 'Loading Screen Distance'.
 
 
 Changes for v1.0.6:

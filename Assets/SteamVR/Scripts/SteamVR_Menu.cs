@@ -5,6 +5,7 @@
 //=============================================================================
 
 using UnityEngine;
+using Valve.VR;
 
 public class SteamVR_Menu : MonoBehaviour
 {
@@ -153,12 +154,6 @@ public class SteamVR_Menu : MonoBehaviour
 				}
 			}
 			GUILayout.EndHorizontal();
-
-			bool vsync = vr.compositor.GetVSync();
-			if (GUILayout.Toggle(vsync, "VSync") != vsync)
-			{
-				vr.compositor.SetVSync(!vsync);
-			}
 		}
 
 		overlay.highquality = GUILayout.Toggle(overlay.highquality, "High quality");
@@ -180,20 +175,21 @@ public class SteamVR_Menu : MonoBehaviour
 			tracker.wireframe = GUILayout.Toggle(tracker.wireframe, "Wireframe");
 
 			var render = SteamVR_Render.instance;
-			if (render.trackingSpace == Valve.VR.TrackingUniverseOrigin.TrackingUniverseSeated)
+			if (render.trackingSpace == ETrackingUniverseOrigin.TrackingUniverseSeated)
 			{
 				if (GUILayout.Button("Switch to Standing"))
-					render.trackingSpace = Valve.VR.TrackingUniverseOrigin.TrackingUniverseStanding;
+					render.trackingSpace = ETrackingUniverseOrigin.TrackingUniverseStanding;
 				if (GUILayout.Button("Center View"))
 				{
-					var vr = SteamVR.instance;
-					vr.hmd.ResetSeatedZeroPose();
+					var system = OpenVR.System;
+					if (system != null)
+						system.ResetSeatedZeroPose();
 				}
 			}
 			else
 			{
 				if (GUILayout.Button("Switch to Seated"))
-					render.trackingSpace = Valve.VR.TrackingUniverseOrigin.TrackingUniverseSeated;
+					render.trackingSpace = ETrackingUniverseOrigin.TrackingUniverseSeated;
 			}
 		}
 

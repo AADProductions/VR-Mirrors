@@ -27,11 +27,15 @@ public class SteamVR_CameraMask : MonoBehaviour
 		mr.material = material;
 		mr.shadowCastingMode = ShadowCastingMode.Off;
 		mr.receiveShadows = false;
+#if !(UNITY_5_3 || UNITY_5_2 || UNITY_5_1 || UNITY_5_0)
+		mr.lightProbeUsage = LightProbeUsage.Off;
+#else
 		mr.useLightProbes = false;
+#endif
 		mr.reflectionProbeUsage = ReflectionProbeUsage.Off;
 	}
 
-	public void Set(SteamVR vr, Valve.VR.Hmd_Eye eye)
+	public void Set(SteamVR vr, Valve.VR.EVREye eye)
 	{
 		int i = (int)eye;
 		if (hiddenAreaMeshes[i] == null)
