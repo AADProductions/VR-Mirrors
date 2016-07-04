@@ -10,19 +10,11 @@ using Valve.VR;
 
 public class SteamVR_Render : MonoBehaviour
 {
-	public float helpSeconds = 10.0f;
-	public string helpText = "You may now put on your headset.";
-	public GUIStyle helpStyle;
-
 	public bool pauseGameWhenDashboardIsVisible = true;
 	public bool lockPhysicsUpdateRateToRenderFrequency = true;
 
 	public SteamVR_ExternalCamera externalCamera;
 	public string externalCameraConfigPath = "externalcamera.cfg";
-
-	public LayerMask leftMask, rightMask;
-
-	SteamVR_CameraMask cameraMask;
 
 	public ETrackingUniverseOrigin trackingSpace = ETrackingUniverseOrigin.TrackingUniverseStanding;
 
@@ -134,7 +126,19 @@ public class SteamVR_Render : MonoBehaviour
 	public TrackedDevicePose_t[] poses = new TrackedDevicePose_t[OpenVR.k_unMaxTrackedDeviceCount];
 	public TrackedDevicePose_t[] gamePoses = new TrackedDevicePose_t[0];
 
-	static public bool pauseRendering = false;
+	static private bool _pauseRendering;
+	static public bool pauseRendering
+	{
+		get { return _pauseRendering; }
+		set
+		{
+			_pauseRendering = value;
+
+			var compositor = OpenVR.Compositor;
+			if (compositor != null)
+				compositor.SuspendRendering(value);
+		}
+	}
 
 	private IEnumerator RenderLoop()
 	{
@@ -152,19 +156,6 @@ public class SteamVR_Render : MonoBehaviour
 					continue;
 
 				compositor.SetTrackingSpace(trackingSpace);
-
-#if (UNITY_5_3 || UNITY_5_2 || UNITY_5_1 || UNITY_5_0)
-				SteamVR_Utils.QueueEventOnRenderThread(SteamVR.Unity.k_nRenderEventID_WaitGetPoses);
-
-				// Hack to flush render event that was queued in Update (this ensures WaitGetPoses has returned before we grab the new values).
-				SteamVR.Unity.EventWriteString("[UnityMain] GetNativeTexturePtr - Begin");
-				SteamVR_Camera.GetSceneTexture(cameras[0].GetComponent<Camera>().hdr).GetNativeTexturePtr();
-				SteamVR.Unity.EventWriteString("[UnityMain] GetNativeTexturePtr - End");
-
-				compositor.GetLastPoses(poses, gamePoses);
-				SteamVR_Utils.Event.Send("new_poses", poses);
-				SteamVR_Utils.Event.Send("new_poses_applied");
-#endif
 			}
 
 			var overlay = SteamVR_Overlay.instance;
@@ -172,56 +163,6 @@ public class SteamVR_Render : MonoBehaviour
 				overlay.UpdateOverlay();
 
 			RenderExternalCamera();
-
-#if (UNITY_5_3 || UNITY_5_2 || UNITY_5_1 || UNITY_5_0)
-			var vr = SteamVR.instance;
-			RenderEye(vr, EVREye.Eye_Left);
-			RenderEye(vr, EVREye.Eye_Right);
-
-			// Move cameras back to head position so they can be tracked reliably
-			foreach (var c in cameras)
-			{
-				c.transform.localPosition = Vector3.zero;
-				c.transform.localRotation = Quaternion.identity;
-			}
-
-			if (cameraMask != null)
-				cameraMask.Clear();
-#endif
-		}
-	}
-
-	void RenderEye(SteamVR vr, EVREye eye)
-	{
-		int i = (int)eye;
-		SteamVR_Render.eye = eye;
-
-		if (cameraMask != null)
-			cameraMask.Set(vr, eye);
-
-		foreach (var c in cameras)
-		{
-			c.transform.localPosition = vr.eyes[i].pos;
-			c.transform.localRotation = vr.eyes[i].rot;
-
-			// Update position to keep from getting culled
-			cameraMask.transform.position = c.transform.position;
-
-			var camera = c.GetComponent<Camera>();
-			camera.targetTexture = SteamVR_Camera.GetSceneTexture(camera.hdr);
-			int cullingMask = camera.cullingMask;
-			if (eye == EVREye.Eye_Left)
-			{
-				camera.cullingMask &= ~rightMask;
-				camera.cullingMask |= leftMask;
-			}
-			else
-			{
-				camera.cullingMask &= ~leftMask;
-				camera.cullingMask |= rightMask;
-			}
-			camera.Render();
-			camera.cullingMask = cullingMask;
 		}
 	}
 
@@ -304,10 +245,6 @@ public class SteamVR_Render : MonoBehaviour
 
 	void Awake()
 	{
-		var go = new GameObject("cameraMask");
-		go.transform.parent = transform;
-		cameraMask = go.AddComponent<SteamVR_CameraMask>();
-
 		if (externalCamera == null && System.IO.File.Exists(externalCameraConfigPath))
 		{
 			var prefab = Resources.Load<GameObject>("SteamVR_ExternalCamera");
@@ -320,37 +257,17 @@ public class SteamVR_Render : MonoBehaviour
 		}
 	}
 
-	void FixedUpdate()
-	{
-#if (UNITY_5_3 || UNITY_5_2 || UNITY_5_1 || UNITY_5_0)
-		// We want to call this as soon after Present as possible.
-		SteamVR_Utils.QueueEventOnRenderThread(SteamVR.Unity.k_nRenderEventID_PostPresentHandoff);
-#endif
-	}
-
-#if !(UNITY_5_3 || UNITY_5_2 || UNITY_5_1 || UNITY_5_0)
 	private SteamVR_UpdatePoses poseUpdater;
-#endif
 
 	void Update()
 	{
-#if !(UNITY_5_3 || UNITY_5_2 || UNITY_5_1 || UNITY_5_0)
 		if (poseUpdater == null)
 		{
 			var go = new GameObject("poseUpdater");
 			go.transform.parent = transform;
 			poseUpdater = go.AddComponent<SteamVR_UpdatePoses>();
 		}
-#else
-		if (cameras.Length == 0)
-		{
-			enabled = false;
-			return;
-		}
 
-		// If our FixedUpdate rate doesn't match our render framerate, then catch the handoff here.
-		SteamVR_Utils.QueueEventOnRenderThread(SteamVR.Unity.k_nRenderEventID_PostPresentHandoff);
-#endif
 		// Force controller update in case no one else called this frame to ensure prevState gets updated.
 		SteamVR_Controller.Update();
 
@@ -368,10 +285,16 @@ public class SteamVR_Render : MonoBehaviour
 				switch ((EVREventType)vrEvent.eventType)
 				{
 					case EVREventType.VREvent_InputFocusCaptured: // another app has taken focus (likely dashboard)
-						SteamVR_Utils.Event.Send("input_focus", false);
+						if (vrEvent.data.process.oldPid == 0)
+						{
+							SteamVR_Utils.Event.Send("input_focus", false);
+						}
 						break;
 					case EVREventType.VREvent_InputFocusReleased: // that app has released input focus
-						SteamVR_Utils.Event.Send("input_focus", true);
+						if (vrEvent.data.process.pid == 0)
+						{
+							SteamVR_Utils.Event.Send("input_focus", true);
+						}
 						break;
 					case EVREventType.VREvent_ShowRenderModels:
 						SteamVR_Utils.Event.Send("hide_render_models", false);
@@ -394,7 +317,7 @@ public class SteamVR_Render : MonoBehaviour
 		QualitySettings.maxQueuedFrames = -1;
 		QualitySettings.vSyncCount = 0; // this applies to the companion window
 
-		if (lockPhysicsUpdateRateToRenderFrequency)
+		if (lockPhysicsUpdateRateToRenderFrequency && Time.timeScale > 0.0f)
 		{
 			var vr = SteamVR.instance;
 			if (vr != null)
@@ -403,44 +326,9 @@ public class SteamVR_Render : MonoBehaviour
 				timing.m_nSize = (uint)System.Runtime.InteropServices.Marshal.SizeOf(typeof(Compositor_FrameTiming));
 				vr.compositor.GetFrameTiming(ref timing, 0);
 
-				Time.fixedDeltaTime = Time.timeScale * timing.m_nNumFramePresents / SteamVR.instance.hmd_DisplayFrequency;
+				Time.fixedDeltaTime = Time.timeScale / vr.hmd_DisplayFrequency;
+				Time.maximumDeltaTime = Time.fixedDeltaTime * timing.m_nNumFramePresents;
 			}
-		}
-	}
-
-	void OnGUI()
-	{
-		var t = Time.timeSinceLevelLoad;
-		if (t < helpSeconds)
-		{
-			if (helpStyle == null)
-			{
-				helpStyle = new GUIStyle(GUI.skin.label);
-				helpStyle.fontSize = 32;
-			}
-
-			if (t > helpSeconds - 1.0f)
-			{
-				var color = helpStyle.normal.textColor;
-				color.a = helpSeconds - t;
-				helpStyle.normal.textColor = color;
-			}
-
-			GUILayout.BeginArea(new Rect(0, 0, Screen.width, Screen.height));
-			GUILayout.BeginVertical();
-			GUILayout.FlexibleSpace();
-			GUILayout.Label(helpText, helpStyle);
-			GUILayout.EndVertical();
-			GUILayout.EndArea();
-		}
-	}
-
-	static public void ShowHelpText(string text, float seconds)
-	{
-		if (_instance != null)
-		{
-			_instance.helpText = text;
-			_instance.helpSeconds = Time.timeSinceLevelLoad + seconds;
 		}
 	}
 }

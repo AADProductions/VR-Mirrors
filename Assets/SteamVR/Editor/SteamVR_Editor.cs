@@ -27,11 +27,9 @@ public class SteamVR_Editor : Editor
 	void OnEnable()
 	{
 		var resourcePath = GetResourcePath();
-#if UNITY_5_0
-		logo = Resources.LoadAssetAtPath<Texture2D>(resourcePath + "logo.png");
-#else
+
 		logo = AssetDatabase.LoadAssetAtPath<Texture2D>(resourcePath + "logo.png");
-#endif
+
 		script = serializedObject.FindProperty("m_Script");
 
 		wireframe = serializedObject.FindProperty("wireframe");
@@ -121,6 +119,7 @@ public class SteamVR_Editor : Editor
 			"Assets/Plugins/x86_64/openvr_api.dll",
 			"Assets/Plugins/x86_64/steam_api.dll",
 			"Assets/Plugins/x86_64/libsteam_api.so",
+			"Assets/Plugins/x86_64/libopenvr_api.so",
 		}, "steamvr.unitypackage", ExportPackageOptions.Recurse);
 		EditorApplication.Exit(0);
 	}

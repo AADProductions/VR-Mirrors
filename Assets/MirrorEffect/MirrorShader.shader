@@ -2,43 +2,63 @@
 	Properties{
 		_LeftEyeTexture("Left Eye Texture", 2D) = "white" {}
 		_RightEyeTexture("Left Eye Texture", 2D) = "white" {}
-		_Radius("Radius", Float) = 64
 	}
 
 	SubShader{
 		Tags{ "RenderType" = "Opaque" }
-		//ColorMask RGBA
-		Lighting off
-		//ZWrite on
+		LOD 100
 
-		CGPROGRAM
+		Pass
+		{
+			CGPROGRAM
+			#pragma vertex vert
+			#pragma fragment frag
+			#pragma target 3.0
 
-		#include "UnityShaderVariables.cginc"
+			#pragma multi_compile __ STEREO_RENDER
 
-		#pragma surface surf StandardSpecular
+			#include "UnityCG.cginc"
 
-		struct Input {
-			float2 uv_LeftEyeTexture;
-			float2 uv_RightEyeTexture;
-			float4 screenPos;
-			float3 worldPos;
-		};
+			struct appdata
+			{
+				float4 vertex : POSITION;
+				float2 uv:TEXCOORD0;
+			};
 
-		sampler2D _LeftEyeTexture;
-		sampler2D _RightEyeTexture;
-		fixed3 _Origin;
-		half _Radius;
+			struct v2f
+			{
+				float2 uv : TEXCOORD0;
+			};
 
-		void surf(Input IN, inout SurfaceOutputStandardSpecular o) {
-			float2 screenUV = IN.screenPos.xy / IN.screenPos.w;
-			if (unity_CameraProjection[0][2] < 0) {
-				o.Emission = tex2D(_LeftEyeTexture, screenUV).rgb;
-			} else {
-				o.Emission = tex2D(_RightEyeTexture, screenUV).rgb;
+			sampler2D _LeftEyeTexture;
+			sampler2D _RightEyeTexture;
+
+			v2f vert(appdata v, out float4 outpos : SV_POSITION)
+			{
+				v2f o;
+				outpos = mul(UNITY_MATRIX_MVP, v.vertex);
+
+				o.uv = v.uv;
+				return o;
 			}
-		}
 
-		ENDCG
+			fixed4 frag(v2f i, UNITY_VPOS_TYPE screenPos : VPOS) : SV_Target
+			{
+				float2 sUV = screenPos.xy / _ScreenParams.xy;
+
+				fixed4 col = fixed4(0.0, 0.0, 0.0, 0.0);
+				if (unity_CameraProjection[0][2] < 0)
+				{
+					col = tex2D(_LeftEyeTexture, sUV);
+				}
+				else {
+					col = tex2D(_RightEyeTexture, sUV);
+				}
+
+				return col;
+			}
+			ENDCG
+		}
 	}
 
 	Fallback "Diffuse"

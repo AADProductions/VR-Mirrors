@@ -25,12 +25,16 @@ public class MirrorCamera : MonoBehaviour {
 		if (RenderAsMirror) {
 			//create render textures based on the screen size so reflections look realistic
 			//TODO create / release temporary render textures
-			leftEyeRenderTexture = new RenderTexture (2160, 1200, 24);
-			rightEyeRenderTexture = new RenderTexture (2160, 1200, 24);
-		} else {
+			leftEyeRenderTexture = new RenderTexture ((int)SteamVR.instance.sceneWidth, (int)SteamVR.instance.sceneHeight, 24);
+			rightEyeRenderTexture = new RenderTexture ((int)SteamVR.instance.sceneWidth, (int)SteamVR.instance.sceneHeight, 24);
+        } else {
 			leftEyeRenderTexture = new RenderTexture (TextureSize, TextureSize, 24);
 			rightEyeRenderTexture = new RenderTexture (TextureSize, TextureSize, 24);
 		}
+
+		int aa = QualitySettings.antiAliasing == 0 ? 1 : QualitySettings.antiAliasing;
+		leftEyeRenderTexture.antiAliasing = aa;
+		rightEyeRenderTexture.antiAliasing = aa;
 	}
 
 	protected Matrix4x4 HMDMatrix4x4ToMatrix4x4(Valve.VR.HmdMatrix44_t input) {
@@ -82,13 +86,14 @@ public class MirrorCamera : MonoBehaviour {
 				GL.invertCulling = true;
 			}
 			// left eye
-			if (RenderAsMirror) {
-				eyeOffset = SteamVR.instance.eyes [0].pos;
-				transform.localPosition = VrEye.transform.localPosition + VrEye.transform.TransformVector (eyeOffset);
+			eyeOffset = SteamVR.instance.eyes [0].pos;
+			eyeOffset.z = 0.0f;
+            transform.localPosition = VrEye.transform.localPosition + VrEye.transform.TransformVector (eyeOffset);
+
+			if (RenderAsMirror)
+			{
 				cameraForPortal.projectionMatrix = HMDMatrix4x4ToMatrix4x4 (SteamVR.instance.hmd.GetProjectionMatrix (Valve.VR.EVREye.Eye_Left, VrEye.nearClipPlane, VrEye.farClipPlane, Valve.VR.EGraphicsAPIConvention.API_DirectX)) * Matrix4x4.Scale (mirrorMatrixScale);
 			} else {
-				eyeOffset = SteamVR.instance.eyes [0].pos;
-				transform.localPosition = VrEye.transform.localPosition + VrEye.transform.TransformVector (eyeOffset);
 				cameraForPortal.projectionMatrix = HMDMatrix4x4ToMatrix4x4 (SteamVR.instance.hmd.GetProjectionMatrix (Valve.VR.EVREye.Eye_Left, VrEye.nearClipPlane, VrEye.farClipPlane, Valve.VR.EGraphicsAPIConvention.API_DirectX));
 			}
 
@@ -97,13 +102,14 @@ public class MirrorCamera : MonoBehaviour {
 			material.SetTexture("_LeftEyeTexture", leftEyeRenderTexture);
 
 			// right eye
-			if (RenderAsMirror) {
-				eyeOffset = SteamVR.instance.eyes [1].pos;
-				transform.localPosition = VrEye.transform.localPosition + VrEye.transform.TransformVector (eyeOffset);
+			eyeOffset = SteamVR.instance.eyes [1].pos;
+			eyeOffset.z = 0.0f;
+			transform.localPosition = VrEye.transform.localPosition + VrEye.transform.TransformVector (eyeOffset);
+
+			if (RenderAsMirror)
+			{
 				cameraForPortal.projectionMatrix = HMDMatrix4x4ToMatrix4x4 (SteamVR.instance.hmd.GetProjectionMatrix (Valve.VR.EVREye.Eye_Right, VrEye.nearClipPlane, VrEye.farClipPlane, Valve.VR.EGraphicsAPIConvention.API_DirectX)) * Matrix4x4.Scale (mirrorMatrixScale);
 			} else {
-				eyeOffset = SteamVR.instance.eyes [1].pos;
-				transform.localPosition = VrEye.transform.localPosition + VrEye.transform.TransformVector (eyeOffset);
 				cameraForPortal.projectionMatrix = HMDMatrix4x4ToMatrix4x4 (SteamVR.instance.hmd.GetProjectionMatrix (Valve.VR.EVREye.Eye_Right, VrEye.nearClipPlane, VrEye.farClipPlane, Valve.VR.EGraphicsAPIConvention.API_DirectX));
 			}
 

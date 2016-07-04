@@ -27,12 +27,12 @@ public class SteamVR_Settings : EditorWindow
 	const string fullscreenMode = "D3D11 Fullscreen Mode";
 	const string visibleInBackground = "Visible In Background";
 	const string renderingPath = "Rendering Path";
-#if (UNITY_5_3 || UNITY_5_2 || UNITY_5_1 || UNITY_5_0)
-	const string stereoscopicRendering = "Stereoscopic Rendering";
+	const string colorSpace = "Color Space";
+	const string gpuSkinning = "GPU Skinning";
+#if false // skyboxes are currently broken
+	const string singlePassStereoRendering = "Single-Pass Stereo Rendering";
 #endif
-#if (UNITY_5_3 || UNITY_5_2 || UNITY_5_1)
-	const string virtualRealitySupported = "Virtual Reality Support";
-#endif
+
 	const BuildTarget recommended_BuildTarget = BuildTarget.StandaloneWindows64;
 	const bool recommended_ShowUnitySplashScreen = false;
 	const bool recommended_DefaultIsFullScreen = false;
@@ -44,12 +44,12 @@ public class SteamVR_Settings : EditorWindow
 	const D3D11FullscreenMode recommended_FullscreenMode = D3D11FullscreenMode.FullscreenWindow;
 	const bool recommended_VisibleInBackground = true;
 	const RenderingPath recommended_RenderPath = RenderingPath.Forward;
-#if (UNITY_5_3 || UNITY_5_2 || UNITY_5_1 || UNITY_5_0)
-	const bool recommended_StereoscopicRendering = false;
+	const ColorSpace recommended_ColorSpace = ColorSpace.Linear;
+	const bool recommended_GpuSkinning = true;
+#if false
+	const bool recommended_SinglePassStereoRendering = true;
 #endif
-#if (UNITY_5_3 || UNITY_5_2 || UNITY_5_1)
-	const bool recommended_VirtualRealitySupported = false;
-#endif
+
 	static SteamVR_Settings window;
 
 	static SteamVR_Settings()
@@ -81,13 +81,13 @@ public class SteamVR_Settings : EditorWindow
 				PlayerSettings.visibleInBackground != recommended_VisibleInBackground) ||
 			(!EditorPrefs.HasKey(ignore + renderingPath) &&
 				PlayerSettings.renderingPath != recommended_RenderPath) ||
-#if (UNITY_5_3 || UNITY_5_2 || UNITY_5_1 || UNITY_5_0)
-			(!EditorPrefs.HasKey(ignore + stereoscopicRendering) &&
-				PlayerSettings.stereoscopic3D != recommended_StereoscopicRendering) ||
-#endif
-#if (UNITY_5_3 || UNITY_5_2 || UNITY_5_1)
-			(!EditorPrefs.HasKey(ignore + virtualRealitySupported) &&
-				PlayerSettings.virtualRealitySupported != recommended_VirtualRealitySupported) ||
+			(!EditorPrefs.HasKey(ignore + colorSpace) &&
+				PlayerSettings.colorSpace != recommended_ColorSpace) ||
+			(!EditorPrefs.HasKey(ignore + gpuSkinning) &&
+				PlayerSettings.gpuSkinning != recommended_GpuSkinning) ||
+#if false
+			(!EditorPrefs.HasKey(ignore + singlePassStereoRendering) &&
+				PlayerSettings.singlePassStereoRendering != recommended_SinglePassStereoRendering) ||
 #endif
 			forceShow;
 
@@ -98,11 +98,8 @@ public class SteamVR_Settings : EditorWindow
 			//window.title = "SteamVR";
 		}
 
-#if !(UNITY_5_3 || UNITY_5_2 || UNITY_5_1 || UNITY_5_0)
 		// Switch to native OpenVR support.
 		var updated = false;
-
-		UnityEditorInternal.VR.VREditor.InitializeVRPlayerSettingsForBuildTarget(BuildTargetGroup.Standalone);
 
 		if (!PlayerSettings.virtualRealitySupported)
 		{
@@ -155,7 +152,7 @@ public class SteamVR_Settings : EditorWindow
 				Debug.Log(path + " in use; cannot delete.  Please restart Unity to complete upgrade.");
 			}
 		}
-#endif
+
 		EditorApplication.update -= Update;
 	}
 
@@ -173,11 +170,7 @@ public class SteamVR_Settings : EditorWindow
 	public void OnGUI()
 	{
 		var resourcePath = GetResourcePath();
-#if !(UNITY_5_0)
 		var logo = AssetDatabase.LoadAssetAtPath<Texture2D>(resourcePath + "logo.png");
-#else
-		var logo = Resources.LoadAssetAtPath<Texture2D>(resourcePath + "logo.png");
-#endif
 		var rect = GUILayoutUtility.GetRect(position.width, 150, GUI.skin.box);
 		if (logo)
 			GUI.DrawTexture(rect, logo, ScaleMode.ScaleToFit);
@@ -429,56 +422,81 @@ public class SteamVR_Settings : EditorWindow
 
 			GUILayout.EndHorizontal();
 		}
-#if (UNITY_5_3 || UNITY_5_2 || UNITY_5_1 || UNITY_5_0)
-		if (!EditorPrefs.HasKey(ignore + stereoscopicRendering) &&
-			PlayerSettings.stereoscopic3D != recommended_StereoscopicRendering)
+
+		if (!EditorPrefs.HasKey(ignore + colorSpace) &&
+			PlayerSettings.colorSpace != recommended_ColorSpace)
 		{
 			++numItems;
 
-			GUILayout.Label(stereoscopicRendering + string.Format(currentValue, PlayerSettings.stereoscopic3D));
+			GUILayout.Label(colorSpace + string.Format(currentValue, PlayerSettings.colorSpace));
 
 			GUILayout.BeginHorizontal();
 
-			if (GUILayout.Button(string.Format(useRecommended, recommended_StereoscopicRendering)))
+			if (GUILayout.Button(string.Format(useRecommended, recommended_ColorSpace) + " - requires reloading scene"))
 			{
-				PlayerSettings.stereoscopic3D = recommended_StereoscopicRendering;
+				PlayerSettings.colorSpace = recommended_ColorSpace;
 			}
 
 			GUILayout.FlexibleSpace();
 
 			if (GUILayout.Button("Ignore"))
 			{
-				EditorPrefs.SetBool(ignore + stereoscopicRendering, true);
+				EditorPrefs.SetBool(ignore + colorSpace, true);
 			}
 
 			GUILayout.EndHorizontal();
 		}
-#endif
-#if (UNITY_5_3 || UNITY_5_2 || UNITY_5_1)
-		if (!EditorPrefs.HasKey(ignore + virtualRealitySupported) &&
-			PlayerSettings.virtualRealitySupported != recommended_VirtualRealitySupported)
+
+		if (!EditorPrefs.HasKey(ignore + gpuSkinning) &&
+			PlayerSettings.gpuSkinning != recommended_GpuSkinning)
 		{
 			++numItems;
 
-			GUILayout.Label(virtualRealitySupported + string.Format(currentValue, PlayerSettings.virtualRealitySupported));
+			GUILayout.Label(gpuSkinning + string.Format(currentValue, PlayerSettings.gpuSkinning));
 
 			GUILayout.BeginHorizontal();
 
-			if (GUILayout.Button(string.Format(useRecommended, recommended_VirtualRealitySupported)))
+			if (GUILayout.Button(string.Format(useRecommended, recommended_GpuSkinning)))
 			{
-				PlayerSettings.virtualRealitySupported = recommended_VirtualRealitySupported;
+				PlayerSettings.gpuSkinning = recommended_GpuSkinning;
 			}
 
 			GUILayout.FlexibleSpace();
 
 			if (GUILayout.Button("Ignore"))
 			{
-				EditorPrefs.SetBool(ignore + virtualRealitySupported, true);
+				EditorPrefs.SetBool(ignore + gpuSkinning, true);
+			}
+
+			GUILayout.EndHorizontal();
+		}
+
+#if false
+		if (!EditorPrefs.HasKey(ignore + singlePassStereoRendering) &&
+			PlayerSettings.singlePassStereoRendering != recommended_SinglePassStereoRendering)
+		{
+			++numItems;
+
+			GUILayout.Label(singlePassStereoRendering + string.Format(currentValue, PlayerSettings.singlePassStereoRendering));
+
+			GUILayout.BeginHorizontal();
+
+			if (GUILayout.Button(string.Format(useRecommended, recommended_SinglePassStereoRendering)))
+			{
+				PlayerSettings.singlePassStereoRendering = recommended_SinglePassStereoRendering;
+			}
+
+			GUILayout.FlexibleSpace();
+
+			if (GUILayout.Button("Ignore"))
+			{
+				EditorPrefs.SetBool(ignore + singlePassStereoRendering, true);
 			}
 
 			GUILayout.EndHorizontal();
 		}
 #endif
+
 		GUILayout.BeginHorizontal();
 
 		GUILayout.FlexibleSpace();
@@ -495,11 +513,10 @@ public class SteamVR_Settings : EditorWindow
 			EditorPrefs.DeleteKey(ignore + fullscreenMode);
 			EditorPrefs.DeleteKey(ignore + visibleInBackground);
 			EditorPrefs.DeleteKey(ignore + renderingPath);
-#if (UNITY_5_3 || UNITY_5_2 || UNITY_5_1 || UNITY_5_0)
-			EditorPrefs.DeleteKey(ignore + stereoscopicRendering);
-#endif
-#if (UNITY_5_3 || UNITY_5_2 || UNITY_5_1)
-			EditorPrefs.DeleteKey(ignore + virtualRealitySupported);
+			EditorPrefs.DeleteKey(ignore + colorSpace);
+			EditorPrefs.DeleteKey(ignore + gpuSkinning);
+#if false
+			EditorPrefs.DeleteKey(ignore + singlePassStereoRendering);
 #endif
 		}
 
@@ -539,14 +556,15 @@ public class SteamVR_Settings : EditorWindow
 					PlayerSettings.visibleInBackground = recommended_VisibleInBackground;
 				if (!EditorPrefs.HasKey(ignore + renderingPath))
 					PlayerSettings.renderingPath = recommended_RenderPath;
-#if (UNITY_5_3 || UNITY_5_2 || UNITY_5_1 || UNITY_5_0)
-				if (!EditorPrefs.HasKey(ignore + stereoscopicRendering))
-					PlayerSettings.stereoscopic3D = recommended_StereoscopicRendering;
+				if (!EditorPrefs.HasKey(ignore + colorSpace))
+					PlayerSettings.colorSpace = recommended_ColorSpace;
+				if (!EditorPrefs.HasKey(ignore + gpuSkinning))
+					PlayerSettings.gpuSkinning = recommended_GpuSkinning;
+#if false
+				if (!EditorPrefs.HasKey(ignore + singlePassStereoRendering))
+					PlayerSettings.singlePassStereoRendering = recommended_SinglePassStereoRendering;
 #endif
-#if (UNITY_5_3 || UNITY_5_2 || UNITY_5_1)
-				if (!EditorPrefs.HasKey(ignore + virtualRealitySupported))
-					PlayerSettings.virtualRealitySupported = recommended_VirtualRealitySupported;
-#endif
+
 				EditorUtility.DisplayDialog("Accept All", "You made the right choice!", "Ok");
 
 				Close();
@@ -565,9 +583,7 @@ public class SteamVR_Settings : EditorWindow
 						EditorPrefs.SetBool(ignore + defaultIsFullScreen, true);
 					if (PlayerSettings.defaultScreenWidth != recommended_DefaultScreenWidth ||
 						PlayerSettings.defaultScreenHeight != recommended_DefaultScreenHeight)
-					{
 						EditorPrefs.SetBool(ignore + defaultScreenSize, true);
-					}
 					if (PlayerSettings.runInBackground != recommended_RunInBackground)
 						EditorPrefs.SetBool(ignore + runInBackground, true);
 					if (PlayerSettings.displayResolutionDialog != recommended_DisplayResolutionDialog)
@@ -580,14 +596,15 @@ public class SteamVR_Settings : EditorWindow
 						EditorPrefs.SetBool(ignore + visibleInBackground, true);
 					if (PlayerSettings.renderingPath != recommended_RenderPath)
 						EditorPrefs.SetBool(ignore + renderingPath, true);
-#if (UNITY_5_3 || UNITY_5_2 || UNITY_5_1 || UNITY_5_0)
-					if (PlayerSettings.stereoscopic3D != recommended_StereoscopicRendering)
-						EditorPrefs.SetBool(ignore + stereoscopicRendering, true);
+					if (PlayerSettings.colorSpace != recommended_ColorSpace)
+						EditorPrefs.SetBool(ignore + colorSpace, true);
+					if (PlayerSettings.gpuSkinning != recommended_GpuSkinning)
+						EditorPrefs.SetBool(ignore + gpuSkinning, true);
+#if false
+					if (PlayerSettings.singlePassStereoRendering != recommended_SinglePassStereoRendering)
+						EditorPrefs.SetBool(ignore + singlePassStereoRendering, true);
 #endif
-#if (UNITY_5_3 || UNITY_5_2 || UNITY_5_1)
-					if (PlayerSettings.virtualRealitySupported != recommended_VirtualRealitySupported)
-						EditorPrefs.SetBool(ignore + virtualRealitySupported, true);
-#endif
+
 					Close();
 				}
 			}

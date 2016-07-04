@@ -119,7 +119,6 @@ public class SteamVR_ExternalCamera : MonoBehaviour
 		go.name = "camera";
 
 		DestroyImmediate(go.GetComponent<SteamVR_Camera>());
-		DestroyImmediate(go.GetComponent<SteamVR_CameraFlip>());
 
 		cam = go.GetComponent<Camera>();
 		cam.fieldOfView = config.fov;
@@ -149,11 +148,7 @@ public class SteamVR_ExternalCamera : MonoBehaviour
 		clipRenderer.material = clipMaterial;
 		clipRenderer.shadowCastingMode = ShadowCastingMode.Off;
 		clipRenderer.receiveShadows = false;
-#if !(UNITY_5_3 || UNITY_5_2 || UNITY_5_1 || UNITY_5_0)
 		clipRenderer.lightProbeUsage = LightProbeUsage.Off;
-#else
-		clipRenderer.useLightProbes = false;
-#endif
 		clipRenderer.reflectionProbeUsage = ReflectionProbeUsage.Off;
 
 		var clipTransform = clipQuad.transform;
@@ -185,7 +180,10 @@ public class SteamVR_ExternalCamera : MonoBehaviour
 		var h = Screen.height / 2;
 
 		if (cam.targetTexture == null || cam.targetTexture.width != w || cam.targetTexture.height != h)
-			cam.targetTexture = new RenderTexture(w, h, 16, RenderTextureFormat.ARGB32);
+		{
+			cam.targetTexture = new RenderTexture(w, h, 24, RenderTextureFormat.ARGB32);
+			cam.targetTexture.antiAliasing = QualitySettings.antiAliasing == 0 ? 1 : QualitySettings.antiAliasing;
+		}
 
 		cam.nearClipPlane = config.near;
 		cam.farClipPlane = config.far;
@@ -248,6 +246,11 @@ public class SteamVR_ExternalCamera : MonoBehaviour
 		var w = Screen.width / 2;
 		var h = Screen.height / 2;
 		Graphics.DrawTexture(new Rect(0, h, w, h), cam.targetTexture, colorMat);
+	}
+
+	void OnGUI()
+	{
+		// Necessary for Graphics.DrawTexture to work even though we don't do anything here.
 	}
 
 	Camera[] cameras;
