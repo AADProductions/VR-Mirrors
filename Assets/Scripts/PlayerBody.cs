@@ -45,12 +45,12 @@ public class PlayerBody : MonoBehaviour {
 	void OnAnimatorIK()
 	{
 		animator.SetIKPosition (AvatarIKGoal.RightHand, RightHandTarget.position);
-		animator.SetIKRotation (AvatarIKGoal.RightHand, RightHandTarget.rotation);
+		animator.SetIKRotation (AvatarIKGoal.RightHand, RightHandTarget.rotation * Quaternion.Euler(180f, 0f, 0f));
 		animator.SetIKPositionWeight (AvatarIKGoal.RightHand, 1f);
 		animator.SetIKRotationWeight (AvatarIKGoal.RightHand, 1f);
 
 		animator.SetIKPosition (AvatarIKGoal.LeftHand, LeftHandTarget.position);
-		animator.SetIKRotation (AvatarIKGoal.LeftHand, LeftHandTarget.rotation);
+		animator.SetIKRotation (AvatarIKGoal.LeftHand, LeftHandTarget.rotation * Quaternion.Euler(180f, 0f, 0f));
 		animator.SetIKPositionWeight (AvatarIKGoal.LeftHand, 1f);
 		animator.SetIKRotationWeight (AvatarIKGoal.LeftHand, 1f);
 
