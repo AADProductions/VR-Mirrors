@@ -4,8 +4,8 @@ using System.Collections;
 public class PlayerBody : MonoBehaviour {
 
 	public Transform Pivot;
-    public Transform Head;
-    public Transform RightHandTarget;
+	public Transform Head;
+	public Transform RightHandTarget;
 	public Transform LeftHandTarget;
 	public Transform HeadTarget;
 	public Transform LookTarget;
@@ -16,7 +16,7 @@ public class PlayerBody : MonoBehaviour {
 	Vector3 rightFootPos;
 	Vector3 leftFootRot;
 	Vector3 rightFootRot;
-	Vector3 rot;
+//	Vector3 rot;
 
 	void Start () {
 		animator = GetComponent <Animator> ();
