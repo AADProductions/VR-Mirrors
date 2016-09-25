@@ -4,6 +4,7 @@ using System.Collections;
 public class PlayerBody : MonoBehaviour {
 
 	public Transform Pivot;
+	public Transform Head;
 	public Transform RightHandTarget;
 	public Transform LeftHandTarget;
 	public Transform HeadTarget;
@@ -15,7 +16,7 @@ public class PlayerBody : MonoBehaviour {
 	Vector3 rightFootPos;
 	Vector3 leftFootRot;
 	Vector3 rightFootRot;
-	Vector3 rot;
+//	Vector3 rot;
 
 	void Start () {
 		animator = GetComponent <Animator> ();
@@ -36,13 +37,19 @@ public class PlayerBody : MonoBehaviour {
 		rightFootRot.z = 0f;
 
 		Pivot.position = HeadTarget.position;
-		rot = HeadTarget.eulerAngles;
-		//rot.x = 0f;
-		//rot.z = 0f;
-		Pivot.eulerAngles = rot;//Vector3.Lerp (Vector3.zero, rot, 0.5f);
-	}
+        //rot = HeadTarget.eulerAngles;
+        //rot.x = 0f;
+        //rot.z = 0f;
+        //Pivot.eulerAngles = rot;//Vector3.Lerp (Vector3.zero, rot, 0.5f);
+        Pivot.eulerAngles = new Vector3(Pivot.eulerAngles.x, HeadTarget.eulerAngles.y, Pivot.eulerAngles.z);
+    }
 
-	void OnAnimatorIK()
+    void LateUpdate()
+    {
+        Head.eulerAngles = new Vector3(HeadTarget.eulerAngles.z, HeadTarget.eulerAngles.y + 270, -(HeadTarget.eulerAngles.x + 90));
+    }
+
+    void OnAnimatorIK()
 	{
 		animator.SetIKPosition (AvatarIKGoal.RightHand, RightHandTarget.position);
 		animator.SetIKRotation (AvatarIKGoal.RightHand, RightHandTarget.rotation);
@@ -64,7 +71,7 @@ public class PlayerBody : MonoBehaviour {
 		animator.SetIKPositionWeight (AvatarIKGoal.LeftFoot, 1f);
 		animator.SetIKRotationWeight (AvatarIKGoal.LeftFoot, 1f);
 
-		animator.SetLookAtPosition (LookTarget.position);
-		animator.SetLookAtWeight (1f);
+		//animator.SetLookAtPosition (LookTarget.position);
+		//animator.SetLookAtWeight (1f);
 	}
 }
