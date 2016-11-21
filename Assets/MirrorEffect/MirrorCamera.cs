@@ -88,7 +88,8 @@ public class MirrorCamera : MonoBehaviour {
 			// left eye
 			eyeOffset = SteamVR.instance.eyes [0].pos;
 			eyeOffset.z = 0.0f;
-            transform.localPosition = VrEye.transform.localPosition + VrEye.transform.TransformVector (eyeOffset);
+			Vector3 worldSpaceEyeOffset = VrEye.transform.TransformVector(eyeOffset);
+			transform.localPosition = VrEye.transform.localPosition + VrRig.transform.InverseTransformDirection(worldSpaceEyeOffset);
 
 			if (RenderAsMirror)
 			{
@@ -104,7 +105,8 @@ public class MirrorCamera : MonoBehaviour {
 			// right eye
 			eyeOffset = SteamVR.instance.eyes [1].pos;
 			eyeOffset.z = 0.0f;
-			transform.localPosition = VrEye.transform.localPosition + VrEye.transform.TransformVector (eyeOffset);
+			worldSpaceEyeOffset = VrEye.transform.TransformVector(eyeOffset);
+			transform.localPosition = VrEye.transform.localPosition + VrRig.transform.InverseTransformDirection(worldSpaceEyeOffset);
 
 			if (RenderAsMirror)
 			{
