@@ -1,5 +1,5 @@
 //#define TEST_FADE_VIEW
-//========= Copyright 2014, Valve Corporation, All rights reserved. ===========
+//======= Copyright (c) Valve Corporation, All rights reserved. ===============
 //
 // Purpose:	CameraFade script adapted to work with SteamVR.
 //
@@ -32,7 +32,7 @@ public class SteamVR_Fade : MonoBehaviour
 
 	static public void Start(Color newColor, float duration, bool fadeOverlay = false)
 	{
-		SteamVR_Utils.Event.Send("fade", newColor, duration, fadeOverlay);
+		SteamVR_Events.Fade.Send(newColor, duration, fadeOverlay);
 	}
 
 	static public void View(Color newColor, float duration)
@@ -53,13 +53,8 @@ public class SteamVR_Fade : MonoBehaviour
 	}
 #endif
 
-	public void OnStartFade(params object[] args)
+	public void OnStartFade(Color newColor, float duration, bool fadeOverlay)
 	{
-		var newColor = (Color)args[0];
-		var duration = (float)args[1];
-
-		fadeOverlay = (args.Length > 2) && (bool)args[2];
-
 		if (duration > 0.0f)
 		{
 			targetColor = newColor;
@@ -72,21 +67,23 @@ public class SteamVR_Fade : MonoBehaviour
 	}
 
 	static Material fadeMaterial = null;
+	static int fadeMaterialColorID = -1;
 
 	void OnEnable()
 	{
 		if (fadeMaterial == null)
 		{
 			fadeMaterial = new Material(Shader.Find("Custom/SteamVR_Fade"));
+			fadeMaterialColorID = Shader.PropertyToID("fadeColor");
 		}
 
-		SteamVR_Utils.Event.Listen("fade", OnStartFade);
-		SteamVR_Utils.Event.Send("fade_ready");
+		SteamVR_Events.Fade.Listen(OnStartFade);
+		SteamVR_Events.FadeReady.Send();
 	}
 
 	void OnDisable()
 	{
-		SteamVR_Utils.Event.Remove("fade", OnStartFade);
+		SteamVR_Events.Fade.Remove(OnStartFade);
 	}
 
 	void OnPostRender()
@@ -116,17 +113,15 @@ public class SteamVR_Fade : MonoBehaviour
 
 		if (currentColor.a > 0 && fadeMaterial)
 		{
-			GL.PushMatrix();
-			GL.LoadOrtho();
+			fadeMaterial.SetColor(fadeMaterialColorID, currentColor);
 			fadeMaterial.SetPass(0);
 			GL.Begin(GL.QUADS);
-			GL.Color(currentColor);
-			GL.Vertex3(0, 0, 0);
-			GL.Vertex3(1, 0, 0);
+
+			GL.Vertex3(-1, -1, 0);
+			GL.Vertex3( 1, -1, 0);
 			GL.Vertex3(1, 1, 0);
-			GL.Vertex3(0, 1, 0);
+			GL.Vertex3(-1, 1, 0);
 			GL.End();
-			GL.PopMatrix();
 		}
 	}
 }

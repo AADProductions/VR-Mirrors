@@ -1,4 +1,4 @@
-﻿//========= Copyright 2014, Valve Corporation, All rights reserved. ===========
+﻿//======= Copyright (c) Valve Corporation, All rights reserved. ===============
 //
 // Purpose: Adds SteamVR render support to existing camera objects
 //
@@ -18,6 +18,8 @@ public class SteamVR_Camera : MonoBehaviour
 	public Transform offset { get { return _head; } } // legacy
 	public Transform origin { get { return _head.parent; } }
 
+	public new Camera camera { get; private set; }
+
 	[SerializeField]
 	private Transform _ears;
 	public Transform ears { get { return _ears; } }
@@ -31,8 +33,8 @@ public class SteamVR_Camera : MonoBehaviour
 
 	static public float sceneResolutionScale
 	{
-		get { return UnityEngine.VR.VRSettings.renderScale; }
-		set { UnityEngine.VR.VRSettings.renderScale = value; }
+		get { return UnityEngine.XR.XRSettings.eyeTextureResolutionScale; }
+		set { UnityEngine.XR.XRSettings.eyeTextureResolutionScale = value; }
 	}
 
 	#region Enable / Disable
@@ -96,7 +98,11 @@ public class SteamVR_Camera : MonoBehaviour
 
 	#region Functionality to ensure SteamVR_Camera component is always the last component on an object
 
-	void Awake() { ForceLast(); }
+	void Awake()
+	{
+		camera = GetComponent<Camera>(); // cached to avoid runtime lookup
+		ForceLast();
+    }
 
 	static Hashtable values;
 
@@ -180,16 +186,6 @@ public class SteamVR_Camera : MonoBehaviour
 			head.rotation = transform.rotation;
 			head.localScale = Vector3.one;
 			head.tag = tag;
-
-			var camera = head.GetComponent<Camera>();
-			camera.clearFlags = CameraClearFlags.Nothing;
-			camera.cullingMask = 0;
-			camera.eventMask = 0;
-			camera.orthographic = true;
-			camera.orthographicSize = 1;
-			camera.nearClipPlane = 0;
-			camera.farClipPlane = 1;
-			camera.useOcclusionCulling = false;
 		}
 
 		if (transform.parent != head)
@@ -201,14 +197,14 @@ public class SteamVR_Camera : MonoBehaviour
 
 			while (transform.childCount > 0)
 				transform.GetChild(0).parent = head;
-
+#if !UNITY_2017_2_OR_NEWER
 			var guiLayer = GetComponent<GUILayer>();
 			if (guiLayer != null)
 			{
 				DestroyImmediate(guiLayer);
 				head.gameObject.AddComponent<GUILayer>();
 			}
-
+#endif
 			var audioListener = GetComponent<AudioListener>();
 			if (audioListener != null)
 			{
@@ -232,14 +228,14 @@ public class SteamVR_Camera : MonoBehaviour
 		// Move children and components from head back to camera.
 		while (head.childCount > 0)
 			head.GetChild(0).parent = transform;
-
+#if !UNITY_2017_2_OR_NEWER
 		var guiLayer = head.GetComponent<GUILayer>();
 		if (guiLayer != null)
 		{
 			DestroyImmediate(guiLayer);
 			gameObject.AddComponent<GUILayer>();
 		}
-
+#endif
 		if (ears != null)
 		{
 			while (ears.childCount > 0)
