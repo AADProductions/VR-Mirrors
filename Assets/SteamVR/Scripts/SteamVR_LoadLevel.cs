@@ -1,4 +1,4 @@
-﻿//========= Copyright 2015, Valve Corporation, All rights reserved. ===========
+﻿//======= Copyright (c) Valve Corporation, All rights reserved. ===============
 //
 // Purpose: Helper for smoothing over transitions between levels.
 //
@@ -25,14 +25,11 @@ public class SteamVR_LoadLevel : MonoBehaviour
 	// Name of level to load.
 	public string levelName;
 
-	// If loading an external application
-	public bool loadExternalApp;
+	// Name of internal process to launch (instead of levelName).
+	public string internalProcessPath;
 
-	// Name of external application to load
-	public string externalAppPath;
-
-	// The command-line args for the external application to load
-	public string externalAppArgs;
+	// The command-line args for the internal process to launch.
+	public string internalProcessArgs;
 
 	// If true, call LoadLevelAdditiveAsync instead of LoadLevelAsync.
 	public bool loadAdditive;
@@ -100,7 +97,7 @@ public class SteamVR_LoadLevel : MonoBehaviour
 	public void Trigger()
 	{
 		if (!loading && !string.IsNullOrEmpty(levelName))
-			StartCoroutine("LoadLevel");
+			StartCoroutine(LoadLevel());
 	}
 
 	// Helper function to quickly and simply load a level from script.
@@ -166,7 +163,7 @@ public class SteamVR_LoadLevel : MonoBehaviour
 				{
 					var texture = new Texture_t();
 					texture.handle = renderTexture.GetNativeTexturePtr();
-					texture.eType = SteamVR.instance.graphicsAPI;
+					texture.eType = SteamVR.instance.textureType;
 					texture.eColorSpace = EColorSpace.Auto;
 					overlay.SetOverlayTexture(progressBarOverlayHandle, ref texture);
 				}
@@ -255,7 +252,7 @@ public class SteamVR_LoadLevel : MonoBehaviour
 
 		_active = this;
 
-		SteamVR_Utils.Event.Send("loading", true);
+		SteamVR_Events.Loading.Send(true);
 
 		// Calculate rate for fading in loading screen and progress bar.
 		if (loadingScreenFadeInTime > 0.0f)
@@ -277,7 +274,7 @@ public class SteamVR_LoadLevel : MonoBehaviour
 			{
 				var texture = new Texture_t();
 				texture.handle = loadingScreen.GetNativeTexturePtr();
-				texture.eType = SteamVR.instance.graphicsAPI;
+				texture.eType = SteamVR.instance.textureType;
 				texture.eColorSpace = EColorSpace.Auto;
 				overlay.SetOverlayTexture(loadingScreenOverlayHandle, ref texture);
 			}
@@ -286,7 +283,7 @@ public class SteamVR_LoadLevel : MonoBehaviour
 		bool fadedForeground = false;
 
 		// Fade out to compositor
-		SteamVR_Utils.Event.Send("loading_fade_out", fadeOutTime);
+		SteamVR_Events.LoadingFadeOut.Send(fadeOutTime);
 
 		// Optionally set a skybox to use as a backdrop in the compositor.
 		var compositor = OpenVR.Compositor;
@@ -332,7 +329,7 @@ public class SteamVR_LoadLevel : MonoBehaviour
 		transform.parent = null;
 		DontDestroyOnLoad(gameObject);
 
-		if (loadExternalApp)
+		if (!string.IsNullOrEmpty(internalProcessPath))
 		{
 			Debug.Log("Launching external application...");
 			var applications = OpenVR.Applications;
@@ -343,17 +340,17 @@ public class SteamVR_LoadLevel : MonoBehaviour
 			else
 			{
 				var workingDirectory = Directory.GetCurrentDirectory();
-				var fullPath = Path.Combine( workingDirectory, externalAppPath );
+				var fullPath = Path.Combine(workingDirectory, internalProcessPath);
 				Debug.Log("LaunchingInternalProcess");
-				Debug.Log("ExternalAppPath = " + externalAppPath);
+				Debug.Log("ExternalAppPath = " + internalProcessPath);
 				Debug.Log("FullPath = " + fullPath);
-				Debug.Log("ExternalAppArgs = " + externalAppArgs);
+				Debug.Log("ExternalAppArgs = " + internalProcessArgs);
 				Debug.Log("WorkingDirectory = " + workingDirectory);
-				var error = applications.LaunchInternalProcess(fullPath, externalAppArgs, workingDirectory);
+				var error = applications.LaunchInternalProcess(fullPath, internalProcessArgs, workingDirectory);
 				Debug.Log("LaunchInternalProcessError: " + error);
 #if UNITY_EDITOR
 				UnityEditor.EditorApplication.isPlaying = false;
-#else
+#elif !UNITY_METRO
 				System.Diagnostics.Process.GetCurrentProcess().Kill();
 #endif
 			}
@@ -404,8 +401,10 @@ public class SteamVR_LoadLevel : MonoBehaviour
 		}
 
 		// Fade out to compositor
-		SteamVR_Utils.Event.Send("loading_fade_in", fadeInTime);
+		SteamVR_Events.LoadingFadeIn.Send(fadeInTime);
 
+		// Refresh compositor reference since loading scenes might have invalidated it.
+		compositor = OpenVR.Compositor;
 		if (compositor != null)
 		{
 			// Fade out foreground color if necessary.
@@ -444,7 +443,7 @@ public class SteamVR_LoadLevel : MonoBehaviour
 
 		_active = null;
 
-		SteamVR_Utils.Event.Send("loading", false);
+		SteamVR_Events.Loading.Send(false);
 	}
 
 	// Helper to create (or reuse if possible) each of our different overlay types.
@@ -468,7 +467,7 @@ public class SteamVR_LoadLevel : MonoBehaviour
 			overlay.SetOverlayWidthInMeters(handle, widthInMeters);
 
 			// D3D textures are upside-down in Unity to match OpenGL.
-			if (SteamVR.instance.graphicsAPI == EGraphicsAPIConvention.API_DirectX)
+			if (SteamVR.instance.textureType == ETextureType.DirectX)
 			{
 				var textureBounds = new VRTextureBounds_t();
 				textureBounds.uMin = 0;

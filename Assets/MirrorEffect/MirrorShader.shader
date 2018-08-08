@@ -1,4 +1,6 @@
-﻿Shader "MirrorShader" {
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+Shader "MirrorShader" {
 	Properties{
 		_LeftEyeTexture("Left Eye Texture", 2D) = "white" {}
 		_RightEyeTexture("Left Eye Texture", 2D) = "white" {}
@@ -36,7 +38,7 @@
 			v2f vert(appdata v, out float4 outpos : SV_POSITION)
 			{
 				v2f o;
-				outpos = mul(UNITY_MATRIX_MVP, v.vertex);
+				outpos = UnityObjectToClipPos(v.vertex);
 
 				o.uv = v.uv;
 				return o;

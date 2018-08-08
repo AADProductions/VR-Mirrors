@@ -92,9 +92,9 @@ public class MirrorCamera : MonoBehaviour {
 
 			if (RenderAsMirror)
 			{
-				cameraForPortal.projectionMatrix = HMDMatrix4x4ToMatrix4x4 (SteamVR.instance.hmd.GetProjectionMatrix (Valve.VR.EVREye.Eye_Left, VrEye.nearClipPlane, VrEye.farClipPlane, Valve.VR.EGraphicsAPIConvention.API_DirectX)) * Matrix4x4.Scale (mirrorMatrixScale);
+				cameraForPortal.projectionMatrix = HMDMatrix4x4ToMatrix4x4 (SteamVR.instance.hmd.GetProjectionMatrix (Valve.VR.EVREye.Eye_Left, VrEye.nearClipPlane, VrEye.farClipPlane)) * Matrix4x4.Scale (mirrorMatrixScale);
 			} else {
-				cameraForPortal.projectionMatrix = HMDMatrix4x4ToMatrix4x4 (SteamVR.instance.hmd.GetProjectionMatrix (Valve.VR.EVREye.Eye_Left, VrEye.nearClipPlane, VrEye.farClipPlane, Valve.VR.EGraphicsAPIConvention.API_DirectX));
+				cameraForPortal.projectionMatrix = HMDMatrix4x4ToMatrix4x4 (SteamVR.instance.hmd.GetProjectionMatrix (Valve.VR.EVREye.Eye_Left, VrEye.nearClipPlane, VrEye.farClipPlane));
 			}
 
 			cameraForPortal.targetTexture = leftEyeRenderTexture;
@@ -108,9 +108,9 @@ public class MirrorCamera : MonoBehaviour {
 
 			if (RenderAsMirror)
 			{
-				cameraForPortal.projectionMatrix = HMDMatrix4x4ToMatrix4x4 (SteamVR.instance.hmd.GetProjectionMatrix (Valve.VR.EVREye.Eye_Right, VrEye.nearClipPlane, VrEye.farClipPlane, Valve.VR.EGraphicsAPIConvention.API_DirectX)) * Matrix4x4.Scale (mirrorMatrixScale);
+				cameraForPortal.projectionMatrix = HMDMatrix4x4ToMatrix4x4 (SteamVR.instance.hmd.GetProjectionMatrix (Valve.VR.EVREye.Eye_Right, VrEye.nearClipPlane, VrEye.farClipPlane)) * Matrix4x4.Scale (mirrorMatrixScale);
 			} else {
-				cameraForPortal.projectionMatrix = HMDMatrix4x4ToMatrix4x4 (SteamVR.instance.hmd.GetProjectionMatrix (Valve.VR.EVREye.Eye_Right, VrEye.nearClipPlane, VrEye.farClipPlane, Valve.VR.EGraphicsAPIConvention.API_DirectX));
+				cameraForPortal.projectionMatrix = HMDMatrix4x4ToMatrix4x4 (SteamVR.instance.hmd.GetProjectionMatrix (Valve.VR.EVREye.Eye_Right, VrEye.nearClipPlane, VrEye.farClipPlane));
 			}
 
 			cameraForPortal.targetTexture = rightEyeRenderTexture;
